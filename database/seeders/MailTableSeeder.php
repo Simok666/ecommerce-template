@@ -20,7 +20,7 @@ class MailTableSeeder extends Seeder
     {
         $envService = new EnvEditor();
 
-        Settings::group('mail')->set([
+        app(\App\Services\SettingService::class)->set('mail',[
             'mail_mailer'     => 'smtp',
             'mail_host'       => $envService->getValue('DEMO') ? 'mail.inilabs.dev' : '',
             'mail_port'       => $envService->getValue('DEMO') ? '465' : 0,

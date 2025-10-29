@@ -53,6 +53,12 @@
                             <i class="lab lab-fill-seo lab-font-size-16"></i>
                             {{ $t("label.seo") }}
                         </button>
+                        <button type="button"
+                            @click.prevent="multiTargets($event, 'tab-action', 'tab-content', 'nutrition')"
+                            class="tab-action w-full flex items-center gap-3 h-10 px-4 rounded-lg transition bg-white hover:text-primary hover:bg-primary/5">
+                            <i class="lab lab-fill-document lab-font-size-16"></i>
+                            {{ $t("label.nutrition_facts") }}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -420,6 +426,15 @@
             <div class="db-card tab-content" id="seo">
                 <ProductSeoComponent />
             </div>
+            <div class="db-card tab-content px-4" id="nutrition">
+            <div class="db-card-header">
+                <h3 class="db-card-title">{{ $t('label.nutrition_facts') }}</h3>
+            </div>
+            <div class="db-card-body">
+                <ProductNutritionComponent :product-id="$route.params.id" />
+            </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -434,6 +449,7 @@ import targetService from "../../../services/targetService";
 import alertService from "../../../services/alertService";
 import ProductVariationListComponent from "./variation/ProductVariationListComponent";
 import ProductSeoComponent from "./seo/ProductSeoComponent";
+import ProductNutritionComponent from "./nutrition/ProductNutrition.vue";
 import ProductVideoListComponent from "./video/ProductVideoListComponent";
 import { quillEditor } from 'vue3-quill'
 import Datepicker from "@vuepic/vue-datepicker";
@@ -447,6 +463,7 @@ export default {
         ProductVideoListComponent,
         quillEditor,
         ProductSeoComponent,
+        ProductNutritionComponent,
         Datepicker
     },
     data() {
@@ -495,6 +512,7 @@ export default {
             },
             shippingError: {},
             offerError: {},
+            nutritionPreview: null
         };
     },
     computed: {
@@ -532,6 +550,7 @@ export default {
                 this.form.discount = res.data.data.discount_percentage;
                 this.form.offer_start_date = res.data.data.offer_start_date;
                 this.form.offer_end_date = res.data.data.offer_end_date;
+                this.nutritionPreview = res.data.data.nutrition_image;
                 this.loading.isActive = false;
             }).catch((error) => {
                 this.loading.isActive = false;
@@ -629,6 +648,7 @@ export default {
                 alertService.error(err.response.data.message);
             }
         }
+
     },
 };
 </script>

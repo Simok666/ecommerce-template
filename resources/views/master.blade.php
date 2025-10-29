@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('themes/default/css/custom.css') }}">
     <!-- PAGE TITLE -->
     <title>{{ Settings::group('company')->get('company_name') }}</title>
+    <!-- <title>cok</title> -->
 
     <!-- FAV ICON -->
     <link rel="icon" type="image" href="{{ $favicon }}">

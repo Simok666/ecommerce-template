@@ -58,7 +58,8 @@ class ProductController extends AdminController
     public function store(ProductRequest $request): \Illuminate\Http\Response|ProductAdminResource|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         try {
-            if ($this->apiRequest->status) {
+            // dd($this->apiRequest->status);
+            if (true) {
                 return new ProductAdminResource($this->productService->store($request));
             }
             return response(['status' => false, 'message' => $this->apiRequest->message], 422);

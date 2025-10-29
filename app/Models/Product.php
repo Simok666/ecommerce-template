@@ -269,4 +269,10 @@ class Product extends Model implements HasMedia
     {
         return $this->hasOne(ProductReview::class, 'product_id', 'id')->where('user_id', Auth::user()->id);
     }
+
+    public function getNutritionImageAttribute(): ?string
+    {
+        $url = $this->getFirstMediaUrl('product-nutrition');
+        return $url ? asset($url) : null;
+    }
 }

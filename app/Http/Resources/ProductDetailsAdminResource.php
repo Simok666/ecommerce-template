@@ -64,6 +64,7 @@ class ProductDetailsAdminResource extends JsonResource
             'stock'                        => $this->show_stock_out == Activity::DISABLE ? $this->can_purchasable == Ask::NO ? (int)env('NON_PURCHASE_QUANTITY') : (int)$this->stock_items_sum_quantity : 0,
             'taxes'                        => SimpleTaxResource::collection($this->taxes),
             'thumb'                        => $this->thumb,
+            'nutrition_image'              => $this->nutrition_image,
         ];
     }
 }

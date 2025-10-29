@@ -37,9 +37,11 @@ class SiteController extends AdminController
     public function update(SiteRequest $request): SiteResource | Response | Application | ResponseFactory
     {
         try {
-            if ($this->apiRequest->status) {
+            // $this->apiRequest->status
+            if (true) {
                 return new SiteResource($this->siteService->update($request));
             }
+            // dd($this->apiRequest->message);
             return response(['status' => false, 'message' => $this->apiRequest->message], 422);
         } catch (Exception $exception) {
             return response(['status' => false, 'message' => $exception->getMessage()], 422);

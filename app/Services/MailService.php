@@ -24,7 +24,8 @@ class MailService
     public function list()
     {
         try {
-            return Settings::group('mail')->all();
+            $settingService = new SettingService();
+            return $settingService->group('mail')->all();
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);
@@ -37,7 +38,8 @@ class MailService
     public function update(MailRequest $request)
     {
         try {
-            Settings::group('mail')->set($request->validated());
+            $settingService = new SettingService();
+            $settingService->group('mail')->set('mail' ,$request->validated());
             $this->envService->addData([
                 'MAIL_MAILER'       => 'smtp',
                 'MAIL_HOST'         => $request->mail_host,

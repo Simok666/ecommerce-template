@@ -18,7 +18,7 @@ class CookiesTableSeeder extends Seeder
     public function run()
     {
         $envService = new EnvEditor();
-        Settings::group('cookies')->set([
+        app(\App\Services\SettingService::class)->set('cookies',[
             'cookies_details_page_id' => $envService->getValue('DEMO') ? 5 : 0,
             'cookies_summary'         => $envService->getValue(
                 'DEMO'

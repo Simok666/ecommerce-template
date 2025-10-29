@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\OrderAreaController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductSeoController;
+use App\Http\Controllers\Admin\ProductNutritionController;
 use App\Http\Controllers\Admin\SimpleUserController;
 use App\Http\Controllers\Admin\SmsGatewayController;
 use App\Http\Controllers\Admin\SubscriberController;
@@ -473,6 +474,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum'])->group(func
             Route::get('/{product}', [ProductSeoController::class, 'index']);
             Route::match(['post', 'put', 'patch'], '/{product}/update', [ProductSeoController::class, 'update']);
         });
+
+        Route::prefix('nutrition')->name('nutrition.')->group(function () {
+            // Route::match(['post', 'put', 'patch'], '/upload/{product}', [ProductSeoController::class, 'update']);
+            Route::get('/upload/{product}', [ProductNutritionController::class, 'show']);
+            Route::match(['post','put', 'patch'], '/upload/{product}', [ProductNutritionController::class, 'upload']);
+            Route::get('/delete/{product}', [ProductNutritionController::class, 'delete']);
+        });
     });
 
     Route::prefix('country-code')->name('country-code.')->group(function () {
@@ -481,7 +489,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum'])->group(func
         Route::get('/calling-code/{callingCode}', [CountryCodeController::class, 'callingCode']);
     });
 
-    Route::prefix('country')->name('country')->group(function () {
+    Route::prefix('country')->name('country.')->group(function () {
         Route::get('/', [CountryController::class, 'index']);
         Route::get('/show/{country}', [CountryController::class, 'show']);
         Route::post('/', [CountryController::class, 'store']);
@@ -489,7 +497,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum'])->group(func
         Route::match(['put', 'patch', 'post'], '/{country}', [CountryController::class, 'update']);
     });
 
-    Route::prefix('state')->name('state')->group(function () {
+    Route::prefix('state')->name('state.')->group(function () {
         Route::get('/', [StateController::class, 'index']);
         Route::get('/simple-lists', [StateController::class, 'simpleLists']);
         Route::get('/show/{state}', [StateController::class, 'show']);
@@ -499,7 +507,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum'])->group(func
         Route::get('/states/{country}', [StateController::class, 'statesByCountry']);
     });
 
-    Route::prefix('city')->name('city')->group(function () {
+    Route::prefix('city')->name('city.')->group(function () {
         Route::get('/', [CityController::class, 'index']);
         Route::get('/show/{city}', [CityController::class, 'show']);
         Route::post('/', [CityController::class, 'store']);
@@ -850,7 +858,7 @@ Route::prefix('frontend')->name('frontend.')->middleware(['installed', 'apiKey',
         Route::post('/', [FrontendCookiesController::class, 'set']);
     });
 
-    Route::prefix('country-state-city')->name('country-state-city')->group(function () {
+    Route::prefix('country-state-city')->name('country-state-city.')->group(function () {
         Route::get('/countries', [FrontendCountryStateCityController::class, 'countries']);
         Route::get('/states/{country}', [FrontendCountryStateCityController::class, 'statesByCountry']);
         Route::get('/cities/{state}', [FrontendCountryStateCityController::class, 'citiesByState']);

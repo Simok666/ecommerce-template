@@ -34,6 +34,7 @@ class ThemeResource extends JsonResource
 
     public function themeImage($key)
     {
-        return ThemeSetting::where(['key' => $key])->first();
+        // return ThemeSetting::where(['key' => $key])->first();
+        return ThemeSetting::where(['name' => $key])->first();
     }
 }

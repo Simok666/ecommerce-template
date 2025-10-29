@@ -19,7 +19,7 @@ class NotificationTableSeeder extends Seeder
     public function run()
     {
         $envService = new EnvEditor();
-        Settings::group('notification')->set([
+        app(\App\Services\SettingService::class)->set('notification',[
             'notification_fcm_secret_key'          => $envService->getValue('DEMO') ? 'AAAAR-ItgeQ:APA91bHSRHexFge83tV33p9xiV0qyQ-naPZJj8TnCM9xg9gq4c_fyn30LP-x81SEnQDTbPFrqiMHkf7WSYnpM18Zb9uccmJX2wI6d1-DhAB13Kf6WFoUsPeDd07MdAEKTauVAGUD_d_J' : '',
             'notification_fcm_public_vapid_key'    => $envService->getValue('DEMO') ? 'BEJUlPCfKVEuTJOcT4yR53ndElyQo8LJGYaM_GzyjMXgpdvu2bN0eASgrqC18oKhGGE5I0dERO1_UqCJ-sHHETE' : '',
             'notification_fcm_api_key'             => $envService->getValue('DEMO') ? 'AIzaSyBGzuLCCMSABotWASYTSzYK3fAiQ39w5R8' : '',

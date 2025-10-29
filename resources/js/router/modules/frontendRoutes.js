@@ -14,6 +14,7 @@ import PromotionProductComponent from "../../components/frontend/product/Promoti
 import ProductSectionProductComponent from "../../components/frontend/product/ProductSectionProductComponent";
 import FlashSaleProductComponent from "../../components/frontend/product/FlashSaleProductComponent";
 import OfferProductComponent from "../../components/frontend/product/OfferProductComponent";
+import AboutUsComponent from "../../components/frontend/about/AboutUsComponent";
 import OverviewComponent from "../../components/frontend/account/overview/OverviewComponent";
 import AccountComponent from "../../components/frontend/account/AccountComponent";
 import AccountInfoComponent from "../../components/frontend/account/accountInfo/AccountInfoComponent";
@@ -59,6 +60,15 @@ export default [
         path: "/offers",
         component: OfferProductComponent,
         name: "frontend.offers",
+        meta: {
+            isFrontend: true,
+            auth: false,
+        },
+    },
+    {
+        path: "/aboutus",
+        component: AboutUsComponent,
+        name: "frontend.aboutus",
         meta: {
             isFrontend: true,
             auth: false,

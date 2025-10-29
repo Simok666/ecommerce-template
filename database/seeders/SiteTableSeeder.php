@@ -21,7 +21,7 @@ class SiteTableSeeder extends Seeder
     public function run()
     {
         $envService = new EnvEditor();
-        Settings::group('site')->set([
+        app(\App\Services\SettingService::class)->set('site',[
             'site_date_format'                           => 'd-m-Y',
             'site_time_format'                           => 'h:i A',
             'site_default_timezone'                      => 'Asia/Dhaka',

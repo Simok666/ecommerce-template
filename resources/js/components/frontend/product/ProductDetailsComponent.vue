@@ -153,6 +153,11 @@
                                     class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
                                 {{ $t('label.shipping_and_return') }}
                             </button>
+                            <button type="button"
+                                    @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_nutrition_facts')"
+                                    class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
+                                {{ $t('label.nutrition_facts') }}
+                            </button>
                         </nav>
 
                         <div id="tab_details" class="tab-div active p-4 sm:p-8 sm:pt-6 border-t border-[#D9DBE9]">
@@ -236,6 +241,22 @@
                             <h3 class="capitalize text-2xl sm:text-3xl font-bold mb-4">
                                 {{ $t('label.product_shipping_and_return') }}</h3>
                             <div class="text-description" v-html="product.shipping_and_return"></div>
+                        </div>
+
+                        <div id="tab_nutrition_facts" class="tab-div p-4 sm:p-8 sm:pt-6 border-t border-[#D9DBE9]">
+                            <h3 class="capitalize text-2xl sm:text-3xl font-bold mb-4">
+                                {{ $t('label.nutrition_facts') }}
+                            </h3>
+                            <div v-if="nutritionImage" class="w-full flex justify-center">
+                                <img
+                                :src="nutritionImage"
+                                alt="Nutrition Facts"
+                                class="max-w-md w-full rounded-2xl shadow-md object-contain"
+                                />
+                            </div>
+                            <div v-else class="text-center text-gray-400 italic">
+                                {{ $t('message.no_nutrition_image') }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -341,6 +362,7 @@ export default {
                 oldPrice: 0,
                 totalPrice: 0
             },
+            nutritionImage: null,
         }
     },
     computed: {
@@ -372,6 +394,7 @@ export default {
     mounted() {
         this.show();
         this.showRelatedProduct();
+        this.fetchNutritionImage();
     },
     methods: {
         onlyNumber: function (e) {
@@ -431,6 +454,8 @@ export default {
                         oldPrice: res.data.data.old_price,
                         totalPrice: res.data.data.price
                     };
+
+                    this.fetchNutritionImage(res.data.data.id)
 
                     this.$store.dispatch("frontendProductCategory/ancestorsAndSelf", res.data.data.category_slug).then((categoryRes) => {
                         this.loading.isActive = false;
@@ -617,7 +642,18 @@ export default {
                     this.temp.quantity         = this.initProduct.quantity;
                 });
             }
+        },
+        async fetchNutritionImage(productId) {
+        try {
+            const res = await this.$store.dispatch("product/fetchNutritionImage", {
+            productId: productId,
+            });
+
+            this.nutritionImage = res?.data?.nutrition_image || null;
+        } catch (error) {
+            console.error("Error loading nutrition image:", error);
         }
+        },
     },
     watch: {
         $route() {

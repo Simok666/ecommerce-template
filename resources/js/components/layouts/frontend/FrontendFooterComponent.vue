@@ -1,7 +1,7 @@
 <template>
     <LoadingComponent :props="loading" />
 
-    <footer class="pt-12 bg-secondary mobile:hidden">
+    <footer class="pt-12 bg-footer-custom mobile:hidden">
         <div class="container">
             <div class="row">
                 <div class="col-12 md:col-4 lg:col-5 mb-6 md:mb-0">

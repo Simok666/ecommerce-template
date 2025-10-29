@@ -26,7 +26,10 @@ class CompanyService
     public function list()
     {
         try {
-            return Settings::group('company')->all();
+            $settingService = new SettingService();
+        
+            return $settingService->group('company')->all();
+            // return Settings::group('company')->all();
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);
@@ -39,7 +42,8 @@ class CompanyService
     public function update(CompanyRequest $request)
     {
         try {
-            Settings::group('company')->set($request->validated());
+            $settingService = new SettingService();
+            $settingService->group('company')->set('company', $request->validated());
             $this->envService->addData(['APP_NAME' => $request->company_name]);
             Artisan::call('optimize:clear');
             return $this->list();

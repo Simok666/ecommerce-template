@@ -21,6 +21,7 @@ class CompanyController extends AdminController
     public function index() : \Illuminate\Http\Response | CompanyResource | \Illuminate\Contracts\Foundation\Application | \Illuminate\Contracts\Routing\ResponseFactory
     {
         try {
+        
             return new CompanyResource($this->companyService->list());
         } catch (Exception $exception) {
             return response(['status' => false, 'message' => $exception->getMessage()], 422);

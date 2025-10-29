@@ -14,6 +14,7 @@ trait ApiRequestTrait
     {
         try {
             return AppLibrary::licenseApiResponse(Http::post(Config::get('installer.url') . Config::get('installer.productlicence'), Config::get('installer.buildPayload')+['domain' => AppLibrary::domain(Config('app.url'))]));
+            // return true;
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);

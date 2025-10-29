@@ -91,6 +91,14 @@
                                 {{ $t("label.offers") }}
                             </router-link>
                         </li>
+
+                        <li class="header-nav-item">
+                            <router-link class="header-nav-menu"
+                                         :class="checkIsPathAndRoutePathSame('/aboutus') ? 'router-link-active router-link-exact-active' : ''"
+                                         :to="{ name: 'frontend.aboutus' }">
+                                {{ $t("label.aboutus") }}
+                            </router-link>
+                        </li>
                     </ul>
                 </nav>
                 <!-- MenuBar End -->
@@ -227,7 +235,7 @@
                 <!-- Card Button Start -->
                 <button @click.prevent="showTarget('cart-canvas', 'canvas-active')" type="button"
                         class="hidden lg:block flex-shrink-0 relative">
-                    <i class="lab-line-bag text-xl w-10 h-10 !leading-10 text-center rounded-full bg-secondary text-white"></i>
+                    <i class="lab-line-bag text-xl w-10 h-10 !leading-10 text-center rounded-full bg-footer-custom text-white"></i>
                     <span v-if="carts.length > 0" class="absolute top-4 ltr:right-1 rtl:left-1 text-[10px] font-medium h-4 px-1 leading-[14px] text-center rounded-full border border-heading text-white bg-primary">
                         {{ carts.length }}
                     </span>

@@ -16,7 +16,7 @@ class ShippingSetupTableSeeder extends Seeder
      */
     public function run()
     {
-        Settings::group('shipping_setup')->set([
+        app(\App\Services\SettingService::class)->set('shipping_setup',[
             'shipping_setup_method'                 => ShippingMethod::FLAT_WISE,
             'shipping_setup_flat_rate_wise_cost'    => "10",
             'shipping_setup_area_wise_default_cost' => "10",

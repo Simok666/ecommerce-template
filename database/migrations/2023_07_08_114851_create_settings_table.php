@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create(config('settings.repositories.database.table'), function (Blueprint $table) {
             $table->id();
             $table->string('group')->nullable();
-            $table->string('key');
+            $table->string('name');
+            $table->string('key')->nullable();
             $table->json('payload');
             $table->nullableMorphs('settingable');
             $table->timestamps();

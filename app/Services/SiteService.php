@@ -27,7 +27,10 @@ class SiteService
     public function list()
     {
         try {
-            return Settings::group('site')->all();
+            $settingService = new SettingService();
+        
+            return $settingService->group('site')->all();
+            // return Settings::group('site')->all();
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);
@@ -40,8 +43,10 @@ class SiteService
     public function update(SiteRequest $request)
     {
         try {
+            $settingService = new SettingService();
+        
             $currency = Currency::find($request->site_default_currency);
-            Settings::group('site')->set($request->validated() + ['site_default_currency_symbol' => $currency->symbol]);
+            $settingService->group('site')->set('site', $request->validated() + ['site_default_currency_symbol' => $currency->symbol]);
 
             $this->envService->addData([
                 'APP_DEBUG'              => $request->site_app_debug == Activity::ENABLE ? 'true' : 'false',

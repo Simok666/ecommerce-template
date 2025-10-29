@@ -14,7 +14,7 @@ class ThemeTableSeeder extends Seeder
      */
     public function run()
     {
-        Settings::group('theme')->set([
+        app(\App\Services\SettingService::class)->set('theme',[
             'theme_logo'         => "",
             'theme_favicon_logo' => "",
             'theme_footer_logo'  => "",

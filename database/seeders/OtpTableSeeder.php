@@ -18,7 +18,7 @@ class OtpTableSeeder extends Seeder
      */
     public function run()
     {
-        Settings::group('otp')->set([
+        app(\App\Services\SettingService::class)->set('otp',[
             'otp_type'        => (string)OtpType::BOTH,
             'otp_digit_limit' => (string)OtpDigitLimit::FOUR,
             'otp_expire_time' => (string)OtpExpireTime::TEN,

@@ -147,6 +147,92 @@ export const product = {
                 });
             });
         },
+        // async uploadNutritionImage({ commit }, { productId, file }) {
+        //     commit("SET_LOADING", true);
+        //     try {
+        //       const formData = new FormData();
+        //       formData.append("nutrition_image", file);
+      
+        //       const response = await fetch(`/admin/product/nutrition/upload/${productId}`, {
+        //         method: "POST",
+        //         body: formData,
+        //       });
+      
+        //       if (!response.ok) {
+        //         const message = await response.text();
+        //         throw new Error(message);
+        //       }
+      
+        //       const data = await response.json();
+        //       return data;
+        //     } catch (error) {
+        //       console.error("Upload Nutrition Image Error:", error);
+        //       throw error;
+        //     } finally {
+        //       commit("SET_LOADING", false);
+        //     }
+        // },
+        uploadNutritionImage: function (context, payload) {
+            const formData = new FormData();
+            formData.append("nutrition_image", payload.file);
+            return new Promise((resolve, reject) => {
+                axios.post(`/admin/product/nutrition/upload/${payload.productId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(res => {
+                    context.commit('show', res.data.data);
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                });
+            });
+        },
+        deleteNutritionImage: function (context, payload) {
+            return new Promise((resolve, reject) => {
+                axios.get(`/admin/product/nutrition/delete/${payload.productId}`).then(res => {
+                    context.commit('show', res.data.data);
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                });
+            });
+        },
+        fetchNutritionImage: function (context, payload) {
+            return new Promise((resolve, reject) => {
+                axios.get(`admin/product/nutrition/upload/${payload.productId}`).then((res) => {
+                    // if(typeof payload.vuex === "undefined" || payload.vuex === true) {
+                    //     context.commit('lists', res.data.data);
+                    // }
+                    console.log(res)
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                });
+            });
+        },
+        // async deleteNutritionImage({ commit }, { productId }) {
+        //     commit("SET_LOADING", true);
+        //     try {
+        //       const response = await fetch(`/admin/product/nutrition/delete/${productId}`, {
+        //         method: "DELETE",
+        //       });
+      
+        //       if (!response.ok) {
+        //         const message = await response.text();
+        //         throw new Error(message);
+        //       }
+      
+        //       const data = await response.json();
+        //       return data;
+        //     } catch (error) {
+        //       console.error("Delete Nutrition Image Error:", error);
+        //       throw error;
+        //     } finally {
+        //       commit("SET_LOADING", false);
+        //     }
+        //   },
+        
         reset: function (context) {
             context.commit('reset');
         },
