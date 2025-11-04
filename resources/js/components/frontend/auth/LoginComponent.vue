@@ -91,7 +91,7 @@
                 </router-link>
             </div>
 
-            <div v-if="demo === 'true' || demo === 'TRUE' || demo === 'True' || demo === '1' || demo === 1" class="mt-6">
+            <!-- <div v-if="demo === 'true' || demo === 'TRUE' || demo === 'True' || demo === '1' || demo === 1" class="mt-6">
                 <h2 class="mb-6 text-center text-lg font-medium text-heading">{{ $t('message.for_quick_demo') }}</h2>
                 <nav class="grid grid-cols-2 gap-3">
                     <button type="button" @click.prevent="setupCredit('admin')" class="click-to-prop w-full h-10 leading-10 rounded-lg text-center text-sm capitalize text-white bg-orange-500" id="adminClick">
@@ -107,7 +107,7 @@
                         {{ $t('label.pos_operator')}}
                     </button>
                 </nav>
-            </div>
+            </div> -->
         </form>
     </div>
 </template>
