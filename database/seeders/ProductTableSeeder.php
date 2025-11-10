@@ -2838,7 +2838,8 @@ class ProductTableSeeder extends Seeder
                 $productObject = Product::create([
                     'name'                         => $fashionProduct['info']['name'],
                     'slug'                         => Str::slug($fashionProduct['info']['name'] . rand(1, 1000)),
-                    'sku'                          => date('is') . rand(1, 1000),
+                    // 'sku'                          => date('is') . rand(1, 1000),
+                    'sku'                          => 'SKU-' . Str::uuid(),
                     'product_category_id'          => $fashionProduct['info']['category'],
                     'product_brand_id'             => $fashionProduct['info']['brand'],
                     'barcode_id'                   => 1,
