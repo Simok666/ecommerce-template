@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CUSTOM STYLE -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('themes/default/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('themes/default/css/custom.css') }}?v={{ time() }}">
     <!-- PAGE TITLE -->
     <title>{{ Settings::group('company')->get('company_name') }}</title>
     <!-- <title>cok</title> -->
@@ -63,7 +63,7 @@
         const APP_KEY = "{{ env('MIX_API_KEY') }}";
     </script>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('themes/default/js/jquery-v3.7.1.min.js') }}"></script>
     <script src="{{ asset('themes/default/js/drawer.js') }}"></script>
     <script src="{{ asset('themes/default/js/modal.js') }}"></script>
